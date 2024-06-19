@@ -1,0 +1,186 @@
+name: priam
+services:
+  actor_service:
+    build:
+      context: ./PRIAM-Actor-service
+      args:
+        APP_VERSION: "0.0.1-SNAPSHOT"
+        GRADLE_VERSION: "8.0"
+        JRE_VERSION: "17"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/priam-actor?useSSL=false
+    env_file:
+      - ".config.env" # Configuration
+    ports:
+      - 8082:8082
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      # keycloak:
+      #   condition: service_healthy
+    networks:
+      - intra_net
+
+  data_service:
+    build:
+      context: ./PRIAM-Data-service
+      args:
+        APP_VERSION: "0.0.1-SNAPSHOT"
+        GRADLE_VERSION: "8.0"
+        JRE_VERSION: "17"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/priam-actor?useSSL=false
+    env_file:
+      - ".config.env" # Configuration
+    depends_on:
+      - actor_service
+    networks:
+      - intra_net
+    ports:
+      - 8081:8081
+
+  eureka:
+    build:
+      context: ./PRIAM-Eureka
+      args:
+        APP_VERSION: "0.0.1-SNAPSHOT"
+        GRADLE_VERSION: "8.7"
+        JRE_VERSION: "17"
+    env_file:
+      - ".config.env" # Configuration
+    ports:
+      - 8761:8761
+    networks:
+      - intra_net
+    healthcheck:
+      test: ["CMD", "/bin/curl" , "eureka:8761"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+
+  right_service:
+    build:
+      context: ./PRIAM-Right-service
+      args:
+        APP_VERSION: "0.0.1-SNAPSHOT"
+        GRADLE_VERSION: "8.0"
+        JRE_VERSION: "17"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/priam-actor?useSSL=false
+    env_file:
+      - ".config.env" # Configuration
+    ports:
+      - 8083:8083
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - intra_net
+
+  provider_microservice:
+    build:
+      context: ./Provider-microservice
+      args:
+        APP_VERSION: "0.0.1-SNAPSHOT"
+        GRADLE_VERSION: "8.0"
+        JRE_VERSION: "17"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/priam-actor?useSSL=false
+    env_file:
+      - ".config.env" # Configuration
+    ports:
+      - 8086:8086
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - intra_net
+# httpd
+  frontend-client:  
+    build:
+      context: ./PRIAM-Frontend
+      args:
+        API_DATA: data_service:8081
+        API_RIGHT: right_service:8083
+        API_ACTOR: actor_service:8082
+        API_PROVIDER: provider_microservice:8086
+        KEYCLOAK: keycloak:8080
+    ports:
+      - 5000:80
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - intra_net
+  frontend-provider:  
+    build:
+      context: ./PRIAM-Frontend
+      args:
+      # On est obligé de mettre autre chose car c'est le client
+      # lui même qui doit faire les requêtes.
+        API_DATA: localhost:8081
+        API_RIGHT: localhost:8083
+        API_ACTOR: localhost:8082
+        API_PROVIDER: localhost:8086
+        KEYCLOAK: localhost:8080
+    ports:
+      - 4000:80
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - intra_net
+
+  mysqldb:
+    image: mysql
+    volumes:
+      - ./config-mysql:/docker-entrypoint-initdb.d
+    networks:
+      - intra_net
+    env_file:
+      - ".env" # Secrets
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysqldb"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.0
+    # build:
+    #   dockerfile_inline: |
+    #     FROM quay.io/keycloak/keycloak:latest as builder
+
+    #     # Enable health and metrics support
+    #     ENV KC_HEALTH_ENABLED=true
+    #     ENV KC_METRICS_ENABLED=true
+
+    #     RUN dnf install curl 
+    command: start-dev
+    networks: 
+    - intra_net
+    env_file:
+      - ".env" # Secrets      
+    # healthcheck:
+    #   test: "curl --head -fsS http://localhost:9000/health/ready"
+    #   retries: 10
+    #   interval: 3s
+    #   timeout: 30s
+    ports: 
+      - 8080:8080
+    volumes:
+      - ./keycloak-conf:/opt/keycloak/data/
+
+
+networks:
+  intra_net:

@@ -1,0 +1,29 @@
+# Tous les submodules vont être configuré sur la branche docker pour le moment
+[submodule "PRIAM-Actor-service"]
+	path = PRIAM-Actor-service
+	url = git@github.com:PRIAM-solution/PRIAM-Actor-service.git
+    branch = docker
+[submodule "PRIAM-Data-service"]
+	path = PRIAM-Data-service
+	url = git@github.com:PRIAM-solution/PRIAM-Data-service.git
+    branch = docker
+[submodule "PRIAM-Eureka"]
+	path = PRIAM-Eureka
+	url = git@github.com:PRIAM-solution/PRIAM-Eureka.git
+    branch = docker
+[submodule "PRIAM-Frontend"]
+	path = PRIAM-Frontend
+	url = git@github.com:PRIAM-solution/PRIAM-Frontend.git
+    branch = docker
+[submodule "PRIAM-Frontend-Provider"]
+	path = PRIAM-Frontend-Provider
+	url = git@github.com:PRIAM-solution/PRIAM-Frontend-Provider.git
+    branch = docker
+[submodule "PRIAM-Right-service"]
+	path = PRIAM-Right-service
+	url = git@github.com:PRIAM-solution/PRIAM-Right-service.git
+    branch = docker
+[submodule "Provider-microservice"]
+	path = Provider-microservice
+	url = git@github.com:PRIAM-solution/Provider-microservice.git
+    branch = docker
