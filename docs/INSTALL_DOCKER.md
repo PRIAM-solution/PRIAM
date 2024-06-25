@@ -47,4 +47,30 @@ Nous allons donc ensuite accéder à Keycloak.
 
 Allez sur la page `http://localhost:8080`. Vous devriez tomber sur une page comme ceci : 
 
-![image]("./images/1-keycloak-page.png)
+![image]("./images/1-frt.png)
+
+![image]("./images/2-create-realm.png)
+
+![image]("./images/3-create-attr.png)
+
+![image]("./images/4-cr-attr2.png)
+
+![image]("./images/5-clients.png)
+
+![image]("./images/6-dataclient.png)
+
+![image]("./images/7-dataclient2.png)
+
+![image]("./images/8-dataclient3.png)
+
+![image]("./images/9-users.png)
+
+![image]("./images/10-user0.png)
+
+![image]("./images/11-user1.png)
+
+![image]("./images/12-creds.png)
+
+![image]("./images/13-creds2.png)
+
+![image]("./images/14-creds3.png)
