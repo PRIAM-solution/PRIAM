@@ -47,30 +47,61 @@ Nous allons donc ensuite accéder à Keycloak.
 
 Allez sur la page `http://localhost:8080`. Vous devriez tomber sur une page comme ceci : 
 
-![image]("./images/1-frt.png)
+![image](./images/1-frt.png)
 
-![image]("./images/2-create-realm.png)
+Maintenant appuyer sur "create realm" et vous allez tomber sur cette page :
 
-![image]("./images/3-create-attr.png)
+![image](./images/2-create-realm.png)
 
-![image]("./images/4-cr-attr2.png)
+Copié exactement ce qu'il y a sur la page puis ensuite allez sur `realm settings` en bas à droite :
 
-![image]("./images/5-clients.png)
+![image](./images/3-create-attr.png)
 
-![image]("./images/6-dataclient.png)
+Voici à quoi doit ressembler la page. Appuyez sur `Create attribute` :
 
-![image]("./images/7-dataclient2.png)
+![image](./images/4-cr-attr2.png)
 
-![image]("./images/8-dataclient3.png)
+Vous tomberez sur cette page. Remplissez exactement ce qu'il y a sur la page, puis allez sur la page `Clients`. À la fin de cette partie, il ressemblera à ça :
 
-![image]("./images/9-users.png)
+![image](./images/5-clients.png)
 
-![image]("./images/10-user0.png)
+Appuyez sur `Create client` et remplissez exactement la page comme ceci :
 
-![image]("./images/11-user1.png)
+![image](./images/6-dataclient.png)
+![image](./images/7-dataclient2.png)
+![image](./images/8-dataclient3.png)
 
-![image]("./images/12-creds.png)
+Maintenant nous allons nous occuper de la création des utilisateurs. Pour commencer allez sur la page `Users` sur la gauche. À la fin de cette partie vous aurez ces deux utilisateurs qui apparaitrons :  
 
-![image]("./images/13-creds2.png)
+![image](./images/9-users.png)
 
-![image]("./images/14-creds3.png)
+Cliquez donc sur `Add user` puis copiez à l'identique les valeurs dans la catégorie.
+
+![image](./images/10-user0.png)
+
+Maintenant vous devez refaire exactement la même chose avec `user1` :
+
+![image](./images/11-user1.png)
+
+À partir de là il ne manque plus qu'à faire les identifiants de connexion pour l'utilisateur 0. Revenez sur `user0` et allez sur `Credentials` : 
+
+![image](./images/12-creds.png)
+
+Appuyez sur `Set password` et remplissez la page comme sur les captures d'écrans : 
+
+![image](./images/13-creds2.png)
+![image](./images/14-creds3.png)
+
+Choissisez un mot de passe que vous vous souviendrez !
+
+## Lancement 
+
+Il ne manque plus qu'à relancer les services ! Pour ça, utilisez la commande ci-dessous : 
+
+```bash
+docker compose up -d --force-recreate
+```
+
+Cela va relancer tous les services et les connecter entre eux pour de bon !
+
+Maintenant PRIAM est entièrement configuré.
