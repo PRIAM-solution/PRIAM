@@ -107,32 +107,32 @@ services:
         condition: service_healthy
     networks:
       - intra_net
-  # httpd
-  # frontend-client:
-  #   build:
-  #     context: ./PRIAM-Frontend
-  #   ports:
-  #     - 4200:80
-  #   depends_on:
-  #     mysqldb:
-  #       condition: service_healthy
-  #     eureka:
-  #       condition: service_healthy
+
+  frontend-client:
+    build:
+      context: ./PRIAM-Frontend
+    ports:
+      - 4200:80
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
       
-  #   networks:
-  #     - intra_net
-  # frontend-provider:
-  #   build:
-  #     context: ./PRIAM-Frontend
-  #   ports:
-  #     - 4000:80
-  #   depends_on:
-  #     mysqldb:
-  #       condition: service_healthy
-  #     eureka:
-  #       condition: service_healthy
-  #   networks:
-  #     - intra_net
+    networks:
+      - intra_net
+  frontend-provider:
+    build:
+      context: ./PRIAM-Frontend-Provider
+    ports:
+      - 4000:80
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - intra_net
 
   mysqldb:
     image: mysql
