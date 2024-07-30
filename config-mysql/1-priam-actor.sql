@@ -70,7 +70,7 @@ CREATE TABLE `data_subject` (
 --
 
 INSERT INTO `data_subject` (`data_subject_id`, `age`, `id_ref`, `data_subject_category_id`, `data_subject_category_data_subject_category_id`) VALUES
-(1, 20, '507', 1, 1),
+(1, 20, '706', 1, 1),
 (2, 20, '508', 1, 1);
 
 -- --------------------------------------------------------

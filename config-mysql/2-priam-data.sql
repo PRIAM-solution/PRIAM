@@ -37,8 +37,8 @@ CREATE TABLE `consent` (
 -- Dumping data for table `consent`
 --
 
-INSERT INTO `consent` (`data_subject_id`, `processing_id`) VALUES
-(1, 1);
+-- INSERT INTO `consent` (`data_subject_id`, `processing_id`) VALUES
+-- (1, 1);
 
 -- --------------------------------------------------------
 
@@ -77,12 +77,12 @@ CREATE TABLE `data` (
 -- Dumping data for table `data`
 --
 
-INSERT INTO `data` (`data_id`, `data_conservation_duration`, `data_name`, `data_subject_category_id`, `is_personal`, `is_portable`, `is_primary_key`, `source`, `source_details`, `data_type_id`, `personal_data_category_id`) VALUES
-(1, 12, 'po_ADDRESS1', 1, b'1', b'1', b'0', 0, NULL, 3, 2),
-(2, 12, 'po_ADDRESS2', 1, b'1', b'1', b'0', 0, NULL, 3, 2),
-(3, 12, 'po_ID', 1, b'1', b'1', b'1', 1, NULL, 3, 1),
-(4, 12, 'pu_ID', 1, b'1', b'1', b'1', 2, NULL, 6, 2),
-(8, 12, 'pu_EMAIL', 1, b'1', b'1', b'0', 0, NULL, 6, 2);
+-- INSERT INTO `data` (`data_id`, `data_conservation_duration`, `data_name`, `data_subject_category_id`, `is_personal`, `is_portable`, `is_primary_key`, `source`, `source_details`, `data_type_id`, `personal_data_category_id`) VALUES
+-- (1, 12, 'po_ADDRESS1', 1, b'1', b'1', b'0', 0, NULL, 3, 2),
+-- (2, 12, 'po_ADDRESS2', 1, b'1', b'1', b'0', 0, NULL, 3, 2),
+-- (3, 12, 'po_ID', 1, b'1', b'1', b'1', 1, NULL, 3, 1),
+-- (4, 12, 'pu_ID', 1, b'1', b'1', b'1', 2, NULL, 6, 2),
+-- (8, 12, 'pu_EMAIL', 1, b'1', b'1', b'0', 0, NULL, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -129,9 +129,9 @@ CREATE TABLE `data_usage` (
 -- Dumping data for table `data_usage`
 --
 
-INSERT INTO `data_usage` (`data_usage_id`, `c`, `d`, `data_id`, `personal_status`, `r`, `u`, `processing_processing_id`) VALUES
-(1, b'1', b'1', 1, b'1', b'1', b'1', 1),
-(2, b'1', b'0', 2, b'1', b'1', b'0', 1);
+-- INSERT INTO `data_usage` (`data_usage_id`, `c`, `d`, `data_id`, `personal_status`, `r`, `u`, `processing_processing_id`) VALUES
+-- (1, b'1', b'1', 1, b'1', b'1', b'1', 1),
+-- (2, b'1', b'0', 2, b'1', b'1', b'0', 1);
 
 -- --------------------------------------------------------
 
@@ -214,10 +214,10 @@ CREATE TABLE `processed_data` (
 -- Dumping data for table `processed_data`
 --
 
-INSERT INTO `processed_data` (`data_id`, `data_subject_id`) VALUES
-(1, 1),
-(2, 1),
-(8, 1);
+-- INSERT INTO `processed_data` (`data_id`, `data_subject_id`) VALUES
+-- (1, 1),
+-- (2, 1),
+-- (8, 1);
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,7 @@ CREATE TABLE `processing` (
   `processing_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `modified_at` datetime DEFAULT NULL,
-  `processing_category` int(11) DEFAULT NULL,
+  `processing_category` ENUM ('CONSENT', 'LEGITIMATE_INTEREST', 'LEGAL_OBLIGATION', 'PUBLIC_INTEREST', 'VITAL_INTERESTS') DEFAULT NULL,
   `processing_name` varchar(255) DEFAULT NULL,
   `processing_type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -238,8 +238,8 @@ CREATE TABLE `processing` (
 -- Dumping data for table `processing`
 --
 
-INSERT INTO `processing` (`processing_id`, `created_at`, `modified_at`, `processing_category`, `processing_name`, `processing_type`) VALUES
-(1, '2024-05-10 00:28:30', '2024-05-23 00:28:30', NULL, 'stat', NULL);
+-- INSERT INTO `processing` (`processing_id`, `created_at`, `modified_at`, `processing_category`, `processing_name`, `processing_type`) VALUES
+-- (1, '2024-05-10 00:28:30', '2024-05-23 00:28:30', NULL, 'stat', NULL);
 
 -- --------------------------------------------------------
 

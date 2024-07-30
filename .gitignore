@@ -1,3 +1,11 @@
 Keycloak
 .env
 keycloak-conf
+*.zip
+.LKC*
+
+# Pour stocker du code si besoin
+archives
+
+# Ancienne données
+PRIAM-Processing-service

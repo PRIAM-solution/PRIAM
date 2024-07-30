@@ -27,3 +27,11 @@
 	path = Provider-microservice
 	url = git@github.com:PRIAM-solution/Provider-microservice.git
     branch = docker
+[submodule "PRIAM-Gateway"]
+	path = PRIAM-Gateway
+	url = git@github.com:PRIAM-solution/PRIAM-Gateway.git
+    branch = main
+[submodule "PRIAM-Consent-Service"]
+	path = PRIAM-Consent-Service
+	url = git@github.com:PRIAM-solution/PRIAM-Consent-Service.git
+    branch = main
